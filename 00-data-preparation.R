@@ -1,7 +1,6 @@
 library(magick)
 library(data.table)
-library(readxl)
-getuigenissen <- readRDS("data/getuigenissen_20211110.rds")
+getuigenissen <- readRDS("data/getuigenissen.rds")
 fields <- c("subject.nr", "eeuw", "datum.zitting", 
   "conflict", "locatie.misdrijf", "stad.platteland", "taal", "datum.verhoor", 
   "familienaam", "voornaam", "rol", "geslacht", "leeftijd", 
@@ -10,9 +9,6 @@ fields <- c("subject.nr", "eeuw", "datum.zitting",
 getuigenissen$meta$doc_id <- getuigenissen$meta$subject.nr
 getuigenissen$meta$text   <- getuigenissen$meta$gold_text
 #View(getuigenissen$meta[, fields])
-
-
-
 
 
 # x <- getuigenissen$tasks[, c("subject_id", "image_id", "image_urls")]
@@ -54,5 +50,4 @@ DB <- DB[, c("doc_id", "text", "taal", "eeuw", "workflow", "datum.zitting", "dat
        "familienaam", "voornaam", "rol", "geslacht", "leeftijd", 
        "beroep", "geboorteplaats", "woonplaats", "image_urls", "image_urls_n")]
 View(DB)
-saveRDS(DB, file = "src/search/data/DB_20211110.rds")
-DB <- readRDS(file = "src/search/data/DB_20211110.rds")
+saveRDS(DB, file = "src/search/data/DB.rds")
