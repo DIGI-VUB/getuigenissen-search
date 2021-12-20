@@ -13,7 +13,6 @@ server <- function(input, output) {
     filters$geslacht         <- input$ui_getuige_geslacht
     filters$familienaam      <- input$ui_getuige_familienaam
     filters$beroep           <- input$ui_getuige_beroep
-    print(filters)
 
     queries <- strsplit(query, split = "&")
     queries <- unlist(queries)
