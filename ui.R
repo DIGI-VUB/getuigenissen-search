@@ -39,12 +39,12 @@ ui <- fluidPage(theme = bs_theme(version = 4, bootswatch = "litera"),
                   conditionalPanel(
                     condition = "input.ui_search.length > 0",
                     fluidRow(
-                      column(width = 2,
+                      column(width = 3,
                              valueBoxOutput(outputId = "uo_query_stats"),
                              actionButton(inputId = "ui_ander_sample", label = "Toon een andere getuigenis"),
                              htmlOutput(outputId = "uo_getuigenis")
                       ),
-                      column(width = 10, 
+                      column(width = 9, 
                              tabsetPanel(
                                tabPanel("Transcriptie", htmlOutput("ui_txt")),
                                tabPanel("Beeld", 
@@ -55,10 +55,10 @@ ui <- fluidPage(theme = bs_theme(version = 4, bootswatch = "litera"),
                                           actionButton(inputId = "ui_beeld_next", label = "", icon = icon("angle-double-right"))
                                         ),
                                         tags$br(),
-                                        imageOutput("uo_img")),
-                               tabPanel("Gelijkaardige zoektermen", 
-                                        htmlOutput("ui_w2v_zoekterm"),
-                                        tableOutput("uo_w2v_table"))
+                                        imageOutput("uo_img"))#,
+                               #tabPanel("Gelijkaardige zoektermen", 
+                               #         htmlOutput("ui_w2v_zoekterm"),
+                               #          tableOutput("uo_w2v_table"))
                              )
                       )
                     ) 
