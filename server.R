@@ -169,7 +169,7 @@ server <- function(input, output) {
     if(length(chunk_text) == 0){
       hoofd <- tags$br()
     }else{
-      hoofd <- tags$blockquote(sprintf("Hieronder vindt je woorden die (adhv een word2vec model) lijken op je zoekterm: %s", chunk_text))
+      hoofd <- tags$blockquote(sprintf("Hieronder vind je woorden die (adhv een word2vec model) lijken op je zoekterm: %s", chunk_text))
     }
     list(hoofd = hoofd)
   })  
