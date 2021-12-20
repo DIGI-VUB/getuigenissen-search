@@ -141,4 +141,36 @@ server <- function(input, output) {
     removeNotification(id = "noot")
     list(src = tmpfile, contentType = "image/png") 
   }, deleteFile = TRUE)
+  
+  output$uo_w2v_table <- renderTable({
+    info       <- search_results_i()
+    chunk_text <- info$query
+    if(length(chunk_text) > 0){
+      lookup <- chunk_text
+      lookup <- strsplit(lookup, split = "&")
+      lookup <- unlist(lookup)
+      lookup <- strsplit(lookup, split = "\\|")
+      lookup <- unlist(lookup)
+      lookup <- txt_clean_word2vec(lookup, ascii = TRUE, tolower = TRUE, trim = TRUE, alpha = TRUE)
+      lookup <- intersect(lookup, dashdata$w2v_terms)
+      if(length(lookup) > 0){
+        out           <- predict(dashdata$w2v, newdata = lookup, top_n = 10, type = "nearest")
+        out           <- do.call(rbind, out)
+        rownames(out) <- NULL
+        out
+      }else{
+        data.frame(term1 = chunk_text, term2 = "dit woord zat niet in de database")
+      }
+    }
+  })
+  output$ui_w2v_zoekterm <- renderUI({
+    info       <- search_results_i()
+    chunk_text <- info$query
+    if(length(chunk_text) == 0){
+      hoofd <- tags$br()
+    }else{
+      hoofd <- tags$blockquote(sprintf("Hieronder vindt je woorden die (adhv een word2vec model) lijken op je zoekterm: %s", chunk_text))
+    }
+    list(hoofd = hoofd)
+  })  
 }

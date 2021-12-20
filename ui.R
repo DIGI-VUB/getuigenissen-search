@@ -3,7 +3,7 @@ ui <- fluidPage(theme = bs_theme(version = 4, bootswatch = "litera"),
                 useWaiter(),
                 tags$style(type="text/css", "#ui_txt {white-space: pre-wrap; overflow-y: auto;}"),
                 #tags$hr(),
-                tags$blockquote("Hier kan je zoeken in de gedigitaliseerde Getuigenissen"),
+                #tags$blockquote("Hier kan je zoeken in de gedigitaliseerde Getuigenissen"),
                 #tags$hr(),
                 fluidRow(
                   column(1,
@@ -28,7 +28,7 @@ ui <- fluidPage(theme = bs_theme(version = 4, bootswatch = "litera"),
                          searchInput(
                            inputId = "ui_search", 
                            label = NULL, 
-                           placeholder = "Typ hier woorden in bv (moord, Jean, Assebroecke, moord|diefte, wever|bakker|beugel)", 
+                           placeholder = "Typ hier je zoekterm", 
                            btnSearch = icon("search"), 
                            btnReset = icon("remove"), 
                            width = "100%"
@@ -55,8 +55,10 @@ ui <- fluidPage(theme = bs_theme(version = 4, bootswatch = "litera"),
                                           actionButton(inputId = "ui_beeld_next", label = "", icon = icon("angle-double-right"))
                                         ),
                                         tags$br(),
-                                        imageOutput("uo_img"))#,
-                               #tabPanel("Table", tableOutput("uo_table"))
+                                        imageOutput("uo_img")),
+                               tabPanel("Gelijkaardige zoektermen", 
+                                        htmlOutput("ui_w2v_zoekterm"),
+                                        tableOutput("uo_w2v_table"))
                              )
                       )
                     ) 
