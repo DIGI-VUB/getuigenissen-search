@@ -7,6 +7,9 @@ library(magick)
 library(waiter)
 library(shinydashboard)
 library(word2vec)
+library(quanteda)
+library(DT)
+#library(reactable)
 dashdata <- list()
 dashdata$DB <- file.path(Sys.getenv("GETUIGENISSEN_SEARCH_HOME", unset = "/srv/shiny-server/getuigenissen/search"), "data", "DB.rds")
 dashdata$DB <- readRDS(dashdata$DB)
@@ -22,3 +25,10 @@ dashdata$key_values          <- lapply(dashdata$DB[, setdiff(colnames(dashdata$D
 dashdata$w2v       <- file.path(Sys.getenv("GETUIGENISSEN_SEARCH_HOME", unset = "/srv/shiny-server/getuigenissen/search"), "data", "w2v.bin")
 dashdata$w2v       <- read.word2vec(dashdata$w2v)
 dashdata$w2v_terms <- summary(dashdata$w2v)
+dlg <- modalDialog(title = "Uw zoekterm in zijn context", 
+                   DT::dataTableOutput("uo_kwic"), 
+                   #reactable::reactableOutput("uo_kwic"),
+                   size = "xl",
+                   easyClose = TRUE, footer = modalButton("Sluit"))
+
+

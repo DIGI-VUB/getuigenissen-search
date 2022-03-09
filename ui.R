@@ -37,7 +37,10 @@ ui <- fluidPage(theme = bs_theme(version = 4, bootswatch = "litera"),
                 ),
                 fluidPage(
                   conditionalPanel(
-                    condition = "input.ui_search.length > 0",
+                    #condition = "input.ui_search.length > 0",
+                    #condition = "true",
+                    #condition = "input.current_selection_nr > 0",
+                    condition = "output.panel_ready",
                     fluidRow(
                       column(width = 3,
                              valueBoxOutput(outputId = "uo_query_stats"),
