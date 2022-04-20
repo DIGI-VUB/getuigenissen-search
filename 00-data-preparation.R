@@ -50,4 +50,8 @@ DB <- DB[, c("doc_id", "text", "taal", "eeuw", "workflow", "datum.zitting", "dat
        "familienaam", "voornaam", "rol", "geslacht", "leeftijd", 
        "beroep", "geboorteplaats", "woonplaats", "image_urls", "image_urls_n")]
 View(DB)
+
+## Fix by end user
+i <- grep(DB$text, pattern = "Handwerfstraete")
+DB$text[i] <- gsub(DB$text[i], pattern = "Handwerfstraete", replacement = "Hauwerstraete")
 saveRDS(DB, file = "src/search/data/DB.rds")
